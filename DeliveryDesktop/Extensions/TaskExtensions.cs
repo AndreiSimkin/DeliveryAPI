@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DeliveryDesktop.Extensions
+{
+    public static class TaskExtensions
+    {
+        /// <summary>
+        /// allows to call asynchronous method from synchronous code with no warnings;
+        /// </summary>
+        public static async void Forget(this Task task, params Type[] ignorableExceptions)
+        {
+            try
+            {
+                await task.ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                if (!ignorableExceptions.Contains(ex.GetType()))
+                    throw;
+            }
+        }
+    }
+}
