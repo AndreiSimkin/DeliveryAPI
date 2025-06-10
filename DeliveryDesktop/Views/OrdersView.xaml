@@ -19,19 +19,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="42"/>
+            <RowDefinition Height="42"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="640"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Margin="2" 
+        <Button Margin="2"
                 Content="Создать заявку"
                 Command="{Binding CreateOrderCommand}"/>
+        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" FontSize="16" Grid.Row="1"/>
         <ListView 
             x:Name="MyListView" 
             ItemsSource="{Binding Orders}"
-            Grid.Row="1"
+            Grid.Row="2"
             SelectionMode="Single">
             <ListView.ItemTemplate>
                 <DataTemplate>

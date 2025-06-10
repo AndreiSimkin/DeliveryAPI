@@ -13,7 +13,11 @@ using DeliveryDesktop.ViewModels.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.DirectoryServices;
 using System.Linq;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -34,6 +38,8 @@ namespace DeliveryDesktop.ViewModels
         private int _pageNumber = 1;
 
         private bool _isLastPage = false;
+        private readonly Subject<string> _searchSubject = new();
+        private string _ordersFiler = string.Empty;
 
 
         public OrdersViewModel(ICouriersApiService couriersApiService, IOrdersApiService ordersApiService,
@@ -45,8 +51,25 @@ namespace DeliveryDesktop.ViewModels
             _mapper = mapper;
             _dialogService = dialogService;
 
-            LoadContent().Forget();
+            LoadContent(_ordersFiler).Forget();
             LoadCouriers().Forget();
+            SetupSearchObservable();
+        }
+
+        private void SetupSearchObservable()
+        {
+            _searchSubject
+                .DistinctUntilChanged() // Игнорируем дублирующиеся значения
+                .Throttle(TimeSpan.FromMilliseconds(500)) // Задержка 500мс
+                .ObserveOn(SynchronizationContext.Current ?? new SynchronizationContext())
+                .Subscribe(filter =>
+                {
+                    _ordersFiler = filter;
+                    Orders.Clear();
+                    _pageNumber = 1;
+                    LoadContent(_ordersFiler).Forget();
+                });
+
         }
 
         private bool CanAssign => SelectedCourier != null;
@@ -67,6 +90,9 @@ namespace DeliveryDesktop.ViewModels
         [ObservableProperty]
         private CourierModel? _selectedCourier = null;
 
+
+        [ObservableProperty]
+        private string _searchText = string.Empty;
 
 
 
@@ -255,12 +281,13 @@ namespace DeliveryDesktop.ViewModels
         }
 
 
-        private async Task LoadContent()
+        private async Task LoadContent(string filter)
         {
             var pagedResponse = await _ordersApiService.GetOrders(new PaginationRequestDTO()
             {
                 PageSize = PageSize,
-                PageNumber = _pageNumber
+                PageNumber = _pageNumber,
+                Filter = filter
             });
 
             _isLastPage = pagedResponse.PageCount <= _pageNumber;
@@ -279,7 +306,7 @@ namespace DeliveryDesktop.ViewModels
             if (_isLastPage == false)
                 _pageNumber++;
 
-            await LoadContent();
+            await LoadContent(_ordersFiler);
         }
 
 
@@ -314,5 +341,10 @@ namespace DeliveryDesktop.ViewModels
 
         partial void OnSelectedCourierChanged(CourierModel? value) =>
             AssignCourierCommand.NotifyCanExecuteChanged();
+
+        partial void OnSearchTextChanged(string value)
+        {
+            _searchSubject.OnNext(value);
+        }
     }
 }
