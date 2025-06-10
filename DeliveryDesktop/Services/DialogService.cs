@@ -1,14 +1,7 @@
 ﻿using AutoMapper;
-using DeliveryAPI.DTO.Requests.Orders;
-using DeliveryDesktop;
 using DeliveryDesktop.Models;
 using DeliveryDesktop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryDesktop.Services
 {

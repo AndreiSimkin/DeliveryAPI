@@ -10,18 +10,10 @@ using DeliveryDesktop.Models;
 using DeliveryDesktop.Primitives;
 using DeliveryDesktop.Services;
 using DeliveryDesktop.ViewModels.Controls;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.DirectoryServices;
-using System.Linq;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace DeliveryDesktop.ViewModels
 {
@@ -220,7 +212,7 @@ namespace DeliveryDesktop.ViewModels
         public async Task CompleteOrder()
         {
             if (SelectedOrder?.Data == null) return;
-            
+
 
             var completeOrderRequest = new CompleteOrderRequestDTO()
             {
@@ -277,7 +269,7 @@ namespace DeliveryDesktop.ViewModels
                 return;
 
             foreach (var courier in pagedResponse.Items)
-                    Couriers.Add(_mapper.Map<CourierModel>(courier));
+                Couriers.Add(_mapper.Map<CourierModel>(courier));
         }
 
 

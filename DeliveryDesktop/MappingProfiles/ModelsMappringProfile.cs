@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using DeliveryAPI.DTO.Common;
-using DeliveryAPI.DTO.Requests.Couriers;
-using DeliveryAPI.DTO.Requests.Orders;
 using DeliveryDesktop.Models;
 using DeliveryDesktop.ViewModels;
 using DeliveryDesktop.ViewModels.Controls;

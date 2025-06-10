@@ -1,5 +1,4 @@
-﻿using DeliveryAPI.DTO.Requests.Orders;
-using DeliveryDesktop.Models;
+﻿using DeliveryDesktop.Models;
 
 namespace DeliveryDesktop.Services
 {

@@ -1,14 +1,9 @@
 ﻿using DeliveryDesktop.MappingProfiles;
 using DeliveryDesktop.Services;
 using DeliveryDesktop.ViewModels;
-using DeliveryDesktop.Services;
-using DeliveryDesktop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Refit;
-using System.Configuration;
-using System.Data;
-using System.Runtime.InteropServices.JavaScript;
 using System.Windows;
 
 namespace DeliveryDesktop

@@ -1,12 +1,6 @@
 ﻿using DeliveryAPI.DTO.Common;
-using DeliveryAPI.DTO.Requests.Orders;
 using DeliveryAPI.DTO.Requests.OrderStatus;
 using Refit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryDesktop.Services
 {
