@@ -49,7 +49,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <Grid Grid.Column="1" Grid.RowSpan="2">
+        <Grid Grid.Column="1" Grid.RowSpan="3">
             <Grid>
                 <UniformGrid VerticalAlignment="Top"
                     Visibility="{Binding SelectedOrder, Converter={StaticResource DefaultNullToVisibilityConverter}, ConverterParameter='Hiden'}">
