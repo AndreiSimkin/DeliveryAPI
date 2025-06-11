@@ -31,11 +31,11 @@ namespace DeliveryAPI.Controllers
         /// <param name="orderInfo">Информация о заявке.</param>
         /// <returns>Id созданой заявки.</returns>
         [HttpPost]
-        public async Task<IActionResult> CreateOrder(CreateOrderRequestDTO orderInfo)
+        public async Task<ActionResult<IOperationResult>> CreateOrder(CreateOrderRequestDTO orderInfo)
         {
             CreateOrderCommand createOrderCommand = _mapper.Map<CreateOrderCommand>(orderInfo);
             IOperationResult operationResult = await _sender.Send(createOrderCommand);
-            IActionResult actionResult = _mapper.Map<IActionResult>(operationResult);
+            ActionResult<IOperationResult>actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }
@@ -47,7 +47,7 @@ namespace DeliveryAPI.Controllers
         /// <param name="paginationInfo">Параметры пагинации и фильтрации.</param>
         /// <returns>Список заявок.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetOrders([FromQuery] PaginationRequestDTO paginationInfo)
+        public async Task<ActionResult<PagedResponseDTO<OrderDTO>>> GetOrders([FromQuery] PaginationRequestDTO paginationInfo)
         {
             GetOrdersQuery getOrdersQuery = _mapper.Map<GetOrdersQuery>(paginationInfo);
             PagedResult<OrderEntity> pagedResult = await _sender.Send(getOrdersQuery);
@@ -63,11 +63,11 @@ namespace DeliveryAPI.Controllers
         /// <param name="updateOrderRequest">Данные, которые требуется обновить.</param>
         /// <returns>Результат операции.</returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateOrder(UpdateOrderRequestDTO updateOrderRequest)
+        public async Task<ActionResult<IOperationResult>> UpdateOrder(UpdateOrderRequestDTO updateOrderRequest)
         {
             UpdateOrderCommand createOrderCommand = _mapper.Map<UpdateOrderCommand>(updateOrderRequest);
             IOperationResult operationResult = await _sender.Send(createOrderCommand);
-            IActionResult actionResult = _mapper.Map<IActionResult>(operationResult);
+            ActionResult<IOperationResult>actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }
@@ -79,11 +79,11 @@ namespace DeliveryAPI.Controllers
         /// <param name="deleteOrderRequest">Id заявки, которую требуется удалить.</param>
         /// <returns>Результат операции.</returns>
         [HttpDelete]
-        public async Task<IActionResult> DeleteOrder(DeleteOrderRequestDTO deleteOrderRequest)
+        public async Task<ActionResult<IOperationResult>> DeleteOrder(DeleteOrderRequestDTO deleteOrderRequest)
         {
             DeleteOrderCommand deleteOrderCommand = _mapper.Map<DeleteOrderCommand>(deleteOrderRequest);
             IOperationResult operationResult = await _sender.Send(deleteOrderCommand);
-            IActionResult actionResult = _mapper.Map<IActionResult>(operationResult);
+            ActionResult<IOperationResult>actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }

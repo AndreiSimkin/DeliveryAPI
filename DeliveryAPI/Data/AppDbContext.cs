@@ -1,4 +1,5 @@
 ﻿using DeliveryAPI.Data.Models;
+using DeliveryAPI.DbFunctionsExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryAPI.Data
@@ -11,6 +12,12 @@ namespace DeliveryAPI.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             // Nothing here...
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDbFunction(() => PgSqlDbFunctionsExtensions.ToChar(default, string.Empty));
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DeliveryAPI.DTO.ValidationAtributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace DeliveryAPI.DTO.Requests.Orders
 {
@@ -24,6 +25,7 @@ namespace DeliveryAPI.DTO.Requests.Orders
         /// <summary>
         /// Время, когда нужно забрать заказ.
         /// </summary>
+        [DateGreaterThanNowUtc]
         public DateTime PickupTime { get; init; }
 
         /// <summary>

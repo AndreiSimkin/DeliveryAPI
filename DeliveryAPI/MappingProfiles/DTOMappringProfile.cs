@@ -24,10 +24,12 @@ namespace DeliveryAPI.MappingProfiles
             CreateMap<BaseFailedOperationResult, OperationResultDTO>();
             CreateMap<SuccessOperationResult, OperationResultDTO>();
 
+            CreateMap<OrderStatusInfo, OrderStatusInfoDTO>();
+
             CreateMap<CreateEntityOperationResult<Guid>, CreateEntityOperationResultDTO<Guid>>();
 
 
-            CreateMap<IOperationResult, IActionResult>()
+            CreateMap<IOperationResult, ActionResult<IOperationResult>>()
                 .ConstructUsing((operationResult, context) => operationResult switch
                 {
                     NotFoundOperationResult => new NotFoundObjectResult(context.Mapper.Map<OperationResultDTO>(operationResult)),

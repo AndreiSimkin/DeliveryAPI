@@ -32,11 +32,11 @@ namespace DeliveryAPI.Controllers
         /// <param name="courierInfo">Информация о курьере.</param>
         /// <returns>Id зарегистрированного курьера.</returns>
         [HttpPost]
-        public async Task<IActionResult> RegisterCourier(RegisterCourierRequestDTO courierInfo)
+        public async Task<ActionResult<IOperationResult>> RegisterCourier(RegisterCourierRequestDTO courierInfo)
         {
             RegisterCourierCommand createCourierCommand = _mapper.Map<RegisterCourierCommand>(courierInfo);
             IOperationResult operationResult = await _sender.Send(createCourierCommand);
-            IActionResult actionResult = _mapper.Map<IActionResult>(operationResult);
+            ActionResult<IOperationResult> actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }
@@ -48,7 +48,7 @@ namespace DeliveryAPI.Controllers
         /// <param name="query">Параметры пагинации и фильтрации.</param>
         /// <returns>Список курьеров.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetCouriers([FromQuery] PaginationRequestDTO query)
+        public async Task<ActionResult<PagedResponseDTO<CourierDTO>>> GetCouriers([FromQuery] PaginationRequestDTO query)
         {
             GetCouriersQuery getCouriersQuery = _mapper.Map<GetCouriersQuery>(query);
             PagedResult<CourierEntity> pagedResult = await _sender.Send(getCouriersQuery);
@@ -64,11 +64,11 @@ namespace DeliveryAPI.Controllers
         /// <param name="updateCourierRequest">Данные, которые требуется обновить.</param>
         /// <returns>Результат операции.</returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateCourier(UpdateCourierRequestDTO updateCourierRequest)
+        public async Task<ActionResult<IOperationResult>> UpdateCourier(UpdateCourierRequestDTO updateCourierRequest)
         {
             UpdateCourierCommand createCourierCommand = _mapper.Map<UpdateCourierCommand>(updateCourierRequest);
             IOperationResult operationResult = await _sender.Send(createCourierCommand);
-            IActionResult actionResult = _mapper.Map<IActionResult>(operationResult);
+            ActionResult<IOperationResult> actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }
@@ -80,11 +80,11 @@ namespace DeliveryAPI.Controllers
         /// <param name="deleteCourierRequest">Id курьера, которого требуется удалить.</param>
         /// <returns>Результат операции.</returns>
         [HttpDelete]
-        public async Task<IActionResult> DeleteCourier(DeleteCourierRequestDTO deleteCourierRequest)
+        public async Task<ActionResult<IOperationResult>> DeleteCourier(DeleteCourierRequestDTO deleteCourierRequest)
         {
             DeleteCourierCommand createCourierCommand = _mapper.Map<DeleteCourierCommand>(deleteCourierRequest);
             IOperationResult operationResult = await _sender.Send(createCourierCommand);
-            IActionResult actionResult = _mapper.Map<IActionResult>(operationResult);
+            ActionResult<IOperationResult> actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }

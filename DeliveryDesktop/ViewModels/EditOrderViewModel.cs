@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DeliveryAPI.DTO.ValidationAtributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace DeliveryDesktop.ViewModels
@@ -23,6 +24,7 @@ namespace DeliveryDesktop.ViewModels
 
 
         [ObservableProperty]
+        [DateGreaterThanNowUtc]
         [Required(ErrorMessage = "Время получения обязателено")]
         private DateTime? _pickupTime;
 

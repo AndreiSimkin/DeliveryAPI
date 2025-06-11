@@ -2,6 +2,7 @@
 using DeliveryAPI.Common.Models;
 using DeliveryAPI.Data;
 using DeliveryAPI.Data.Models;
+using DeliveryAPI.DbFunctionsExtensions;
 using DeliveryAPI.Queries.Orders;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,10 @@ namespace DeliveryAPI.Handlers.Orders
 
             if (string.IsNullOrWhiteSpace(request.Filter) == false)
                 ordersQuery = ordersQuery.Where(x =>
+                EF.Functions.ILike(x.PickupTime.ToString(), $"%{request.Filter}%") ||
                 EF.Functions.ILike(x.ClientName, $"%{request.Filter}%") ||
+                EF.Functions.ILike(PgSqlDbFunctionsExtensions.ToChar(x.PickupTime, "DD.MM.YYYY HH24:MI:SS"),
+                $"%{request.Filter}%") ||
                 EF.Functions.ILike(x.PickupAddress, $"%{request.Filter}%") ||
                 EF.Functions.ILike(x.DeliveryAddress, $"%{request.Filter}%") ||
                 EF.Functions.ILike(x.CancellationReason ?? string.Empty, $"%{request.Filter}%"));
