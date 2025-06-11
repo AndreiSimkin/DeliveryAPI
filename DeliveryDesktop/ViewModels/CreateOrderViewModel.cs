@@ -33,6 +33,28 @@ namespace DeliveryDesktop.ViewModels
         [Required(ErrorMessage = "Адрес доставки обязателен")]
         private string? _deliveryAddress;
 
+        [ObservableProperty]
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Вес груза обязателен")]
+        private int? _weight;
+
+
+        [ObservableProperty]
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Длина груза обязателена")]
+        private int? _length;
+
+
+        [ObservableProperty]
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Ширина груза обязателена")]
+        private int? _width;
+
+
+        [ObservableProperty]
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Высота груза обязателена")]
+        private int? _height;
 
 
         [RelayCommand]

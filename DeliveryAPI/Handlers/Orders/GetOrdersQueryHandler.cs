@@ -38,9 +38,9 @@ namespace DeliveryAPI.Handlers.Orders
             int totalPages = (int)Math.Ceiling((double)totalCount / request.PageSize);
 
             OrderEntity[] orders = await ordersQuery
+                        .OrderByDescending(o => o.CreatedAt)
                         .Skip(request.PageSize * (request.PageNumber - 1))
                         .Take(request.PageSize)
-                        .OrderByDescending(o => o.CreatedAt)
                         .ToArrayAsync(cancellationToken);
 
             return new PagedResult<OrderEntity>()

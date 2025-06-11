@@ -35,7 +35,7 @@ namespace DeliveryAPI.Controllers
         {
             CreateOrderCommand createOrderCommand = _mapper.Map<CreateOrderCommand>(orderInfo);
             IOperationResult operationResult = await _sender.Send(createOrderCommand);
-            ActionResult<IOperationResult>actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
+            ActionResult<IOperationResult> actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }
@@ -67,7 +67,7 @@ namespace DeliveryAPI.Controllers
         {
             UpdateOrderCommand createOrderCommand = _mapper.Map<UpdateOrderCommand>(updateOrderRequest);
             IOperationResult operationResult = await _sender.Send(createOrderCommand);
-            ActionResult<IOperationResult>actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
+            ActionResult<IOperationResult> actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }
@@ -83,7 +83,7 @@ namespace DeliveryAPI.Controllers
         {
             DeleteOrderCommand deleteOrderCommand = _mapper.Map<DeleteOrderCommand>(deleteOrderRequest);
             IOperationResult operationResult = await _sender.Send(deleteOrderCommand);
-            ActionResult<IOperationResult>actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
+            ActionResult<IOperationResult> actionResult = _mapper.Map<ActionResult<IOperationResult>>(operationResult);
 
             return actionResult;
         }

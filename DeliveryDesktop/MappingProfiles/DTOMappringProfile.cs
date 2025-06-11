@@ -39,6 +39,7 @@ namespace DeliveryDesktop.MappingProfiles
             CreateMap<CourierModel, RegisterCourierRequestDTO>();
 
             // Update
+
             CreateMap<OrderModel, UpdateOrderRequestDTO>();
 
         }

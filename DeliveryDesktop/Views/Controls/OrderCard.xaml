@@ -18,5 +18,17 @@
         <TextBlock Text="{Binding StringFormat='Когда нужно забрать: {0:dd.MM.yyyy HH:mm} UTC', Path=PickupTime}"/>
         <TextBlock Text="{Binding StringFormat='Статус: {0}', Path=Status, Converter={StaticResource DefaultEnumToStringConverter}}"/>
         <TextBlock Text="{Binding StringFormat='Курьер: {0}', Path=Courier, Converter={StaticResource DefaultNullToStringConverter}, ConverterParameter='Не назначен'}"/>
+        <TextBlock>
+            <Run>
+                <Run.Text>
+                    <MultiBinding StringFormat="МГХ: вес {0} грамм, длина {1} см, ширина {2} см, высота {3} см">
+                        <Binding Path="Weight" />
+                        <Binding Path="Length" />
+                        <Binding Path="Width" />
+                        <Binding Path="Height" />
+                    </MultiBinding>
+                </Run.Text>
+            </Run>
+        </TextBlock>
     </StackPanel>
 </UserControl>

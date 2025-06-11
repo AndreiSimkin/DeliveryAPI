@@ -54,6 +54,34 @@ namespace DeliveryAPI.DTO.Common
         public string? CancellationReason { get; init; }
 
         /// <summary>
+        /// Вес груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required]
+        public required int Weight { get; set; }
+
+        /// <summary>
+        /// Длина груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Длина груза обязателена")]
+        public required int Length { get; set; }
+
+        /// <summary>
+        /// Ширина груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Ширина груза обязателена")]
+        public required int Width { get; set; }
+
+        /// <summary>
+        /// Высота груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Высота груза обязателена")]
+        public required int Height { get; set; }
+
+        /// <summary>
         /// Время закрытия заявки.
         /// </summary>
         public DateTime? ClosedAt { get; init; }

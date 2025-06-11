@@ -19,13 +19,32 @@ namespace DeliveryAPI.Commands.Orders
         /// <summary>
         /// Время, когда нужно забрать заказ.
         /// </summary>
-        [Required]
         public DateTime? PickupTime { get; set; }
 
         /// <summary>
         /// Адрес, откуда требуется забрать заказ.
         /// </summary>
         public string? PickupAddress { get; set; }
+
+        /// <summary>
+        /// Вес груза.
+        /// </summary>
+        public int? Weight { get; set; }
+
+        /// <summary>
+        /// Длина груза.
+        /// </summary>
+        public int? Length { get; set; }
+
+        /// <summary>
+        /// Ширина груза.
+        /// </summary>
+        public int? Width { get; set; }
+
+        /// <summary>
+        /// Высота груза.
+        /// </summary>
+        public int? Height { get; set; }
 
         /// <summary>
         /// Адрес, куда требуется доставить заказ.

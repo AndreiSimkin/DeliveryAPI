@@ -12,22 +12,38 @@
         ResizeMode="NoResize"
         Title="Изменить заявку" SizeToContent="Height" Width="400">
     <StackPanel Margin="10">
-            <StackPanel Orientation="Vertical">
-                <Label Content="Имя клиента: "/>
-                <TextBox Text="{Binding ClientName}" Height="25" />
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical">
+            <Label Content="Имя клиента: "/>
+            <TextBox Text="{Binding ClientName}" Height="25" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
             <Label Content="Адрес отправки: "/>
             <TextBox Text="{Binding PickupAddress}" Height="25" />
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <Label Content="Когда забрать заказ UTC: "/>
-                <xctk:DateTimePicker Kind="Utc" Value="{Binding PickupTime}" Height="25"/>
         </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <Label Content="Адрес доставки: "/>
-                <TextBox Text="{Binding DeliveryAddress}" Height="25" />
-            </StackPanel>
-            <Button Command="{Binding SaveCommand}" Height="25" Margin="0, 10, 0, 0" Content="Изменить"/>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Когда забрать заказ UTC: "/>
+            <xctk:DateTimePicker Kind="Utc" Value="{Binding PickupTime}" Height="25"/>
         </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Адрес доставки: "/>
+            <TextBox Text="{Binding DeliveryAddress}" Height="25" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Вес груза (граммы): "/>
+            <TextBox Text="{Binding Weight}" Height="25" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Длина груза (сантиметры): "/>
+            <TextBox Text="{Binding Length}" Height="25" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Ширина груза (сантиметры): "/>
+            <TextBox Text="{Binding Width}" Height="25" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Высота груза (сантиметры): "/>
+            <TextBox Text="{Binding Height}" Height="25" />
+        </StackPanel>
+        <Button Command="{Binding SaveCommand}" Height="25" Margin="0, 10, 0, 0" Content="Изменить"/>
+    </StackPanel>
 </Window>

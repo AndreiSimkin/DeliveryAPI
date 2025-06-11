@@ -24,6 +24,34 @@ namespace DeliveryAPI.DTO.Requests.Orders
         public required DateTime PickupTime { get; init; }
 
         /// <summary>
+        /// Вес груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required]
+        public required int Weight { get; init; }
+
+        /// <summary>
+        /// Длина груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required]
+        public required int Length { get; init; }
+
+        /// <summary>
+        /// Ширина груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required]
+        public required int Width { get; init; }
+
+        /// <summary>
+        /// Высота груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required]
+        public required int Height { get; init; }
+
+        /// <summary>
         /// Адрес, куда требуется доставить заказ.
         /// </summary>
         [MaxLength(200)]

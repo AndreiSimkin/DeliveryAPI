@@ -1,4 +1,5 @@
-﻿using DeliveryDesktop.Primitives;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DeliveryDesktop.Primitives;
 using System.ComponentModel.DataAnnotations;
 
 namespace DeliveryDesktop.Models
@@ -53,6 +54,34 @@ namespace DeliveryDesktop.Models
         /// </summary>
         [MaxLength(500)]
         public string? CancellationReason { get; set; }
+
+        /// <summary>
+        /// Вес груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required]
+        public int Weight { get; set; }
+
+        /// <summary>
+        /// Длина груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Длина груза обязателена")]
+        public int Length { get; set; }
+
+        /// <summary>
+        /// Ширина груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Ширина груза обязателена")]
+        public int Width { get; set; }
+
+        /// <summary>
+        /// Высота груза.
+        /// </summary>
+        [Range(1, 1000)]
+        [Required(ErrorMessage = "Высота груза обязателена")]
+        public int Height { get; set; }
 
         /// <summary>
         /// Время закрытия заявки UTC.
