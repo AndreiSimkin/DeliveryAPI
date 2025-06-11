@@ -13,7 +13,12 @@ namespace DeliveryAPI.MappingProfiles
         {
             // Common
 
-            CreateMap<OrderEntity, OrderDTO>();
+            CreateMap<OrderEntity, OrderDTO>()
+                .ForMember(x => x.CancellationReason,
+                opt => opt.MapFrom(x => x.OrderDetails != null 
+                ? x.OrderDetails.CancellationReason
+                : null));
+
             CreateMap<OrderDTO, OrderEntity>();
             CreateMap<OrderEntity, OrderShortDTO>();
 

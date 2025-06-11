@@ -21,6 +21,7 @@ namespace DeliveryAPI.Handlers.Orders
         public async Task<PagedResult<OrderEntity>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
         {
             var ordersQuery = _dbContext.Orders
+                .Include(d => d.OrderDetails)
                 .Include(o => o.Courier)
                 .AsQueryable();
 
@@ -32,7 +33,7 @@ namespace DeliveryAPI.Handlers.Orders
                 $"%{request.Filter}%") ||
                 EF.Functions.ILike(x.PickupAddress, $"%{request.Filter}%") ||
                 EF.Functions.ILike(x.DeliveryAddress, $"%{request.Filter}%") ||
-                EF.Functions.ILike(x.CancellationReason ?? string.Empty, $"%{request.Filter}%"));
+                (x.OrderDetails != null && EF.Functions.ILike(x.OrderDetails.CancellationReason ?? string.Empty, $"%{request.Filter}%")));
 
             int totalCount = await ordersQuery.CountAsync(cancellationToken);
             int totalPages = (int)Math.Ceiling((double)totalCount / request.PageSize);

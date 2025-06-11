@@ -8,6 +8,7 @@ namespace DeliveryAPI.Data
     {
         public DbSet<OrderEntity> Orders => Set<OrderEntity>();
         public DbSet<CourierEntity> Couriers => Set<CourierEntity>();
+        public DbSet<OrderDetailsEntity> OrderDetails => Set<OrderDetailsEntity>();
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

@@ -59,7 +59,7 @@ namespace DeliveryAPI.Data.Models
         /// Причина отменты заявки.
         /// </summary>
         [MaxLength(500)]
-        public string? CancellationReason { get; set; }
+        public OrderDetailsEntity? OrderDetails { get; set; }
 
         /// <summary>
         /// Вес груза.

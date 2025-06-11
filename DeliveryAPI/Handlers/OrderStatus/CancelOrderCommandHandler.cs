@@ -6,6 +6,7 @@ using DeliveryAPI.Data;
 using DeliveryAPI.Data.Models;
 using DeliveryAPI.Data.Primitives;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryAPI.Handlers.Orders.OrderStatus
 {
@@ -22,7 +23,9 @@ namespace DeliveryAPI.Handlers.Orders.OrderStatus
 
         public async Task<IOperationResult> Handle(CancelOrderCommand request, CancellationToken cancellationToken)
         {
-            OrderEntity? orderEntity = await _dbContext.Orders.FindAsync(request.Id);
+            OrderEntity? orderEntity = await _dbContext.Orders
+                .Include(d => d.OrderDetails)
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (orderEntity == null)
                 return NotFoundOperationResult.OrderNotFoundResult;
@@ -34,7 +37,10 @@ namespace DeliveryAPI.Handlers.Orders.OrderStatus
                 return OrderIsAlreadyCompletedResult;
 
             if (string.IsNullOrWhiteSpace(request.CancellationReason) == false)
-                orderEntity.CancellationReason = request.CancellationReason;
+            {
+                orderEntity.OrderDetails ??= new OrderDetailsEntity();
+                orderEntity.OrderDetails.CancellationReason = request.CancellationReason;
+            }
 
             orderEntity.Status = OrderStatusEnum.Cancelled;
             orderEntity.ClosedAt = DateTime.UtcNow;
