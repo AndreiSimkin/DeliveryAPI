@@ -21,11 +21,11 @@
         <TextBlock>
             <Run>
                 <Run.Text>
-                    <MultiBinding StringFormat="МГХ: вес {0} грамм, длина {1} см, ширина {2} см, высота {3} см">
-                        <Binding Path="Weight" />
+                    <MultiBinding StringFormat="МГХ: {0}x{1}x{2} см, вес {3} грамм">
                         <Binding Path="Length" />
                         <Binding Path="Width" />
                         <Binding Path="Height" />
+                        <Binding Path="Weight" />
                     </MultiBinding>
                 </Run.Text>
             </Run>
